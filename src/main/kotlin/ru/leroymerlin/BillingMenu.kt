@@ -1,16 +1,14 @@
 package ru.leroymerlin
 
 import ru.leroymerlin.counter.ProfitCounter
-import ru.leroymerlin.counter.RevenuerCounter
-import ru.leroymerlin.reader.ItemReader
-import ru.leroymerlin.reader.RevenueReader
-import ru.leroymerlin.reader.ServiceReader
+import ru.leroymerlin.counter.RevenueCounter
 
 class BillingMenu {
     fun greeting() {
-        println("Приветствуем в билинговой системе! Что вам требуется?")
-        print()
-//        var input = readLine()
+        println("Приветствуем в билинговой системе! Что вам требуется? \n")
+
+        showBillingCommands()
+
         while (true) {
             when (readLine()) {
                 "q" -> {
@@ -19,42 +17,21 @@ class BillingMenu {
                 }
                 "1" -> {
                     println("Вы выбрали : Подсчёт минимальной прибыли по товару и услуге")
-                    for (items in ItemReader().getItems().indices) {
-                        val itemsProfit = ProfitCounter(ItemReader().getItems().get(items))
-                        itemsProfit.showResultOfItems()
-                    }
-                    println()
-                    for (service in ServiceReader().getService().indices) {
-                        val servicesProfit = ProfitCounter(ServiceReader().getService().get(service))
-                        servicesProfit.showResultOfServices()
-                    }
-                    print()
+                    ProfitCounter().showMinProfitOfItemsAndService()
                 }
                 "2" -> {
                     println("Вы выбрали : Сверка прибыли по услугам и товарам")
-                    val revenueCounter = RevenuerCounter(
-                        ItemReader().getItems(),
-                        ServiceReader().getService(),
-                        RevenueReader().getRevenue()
-                    )
-
-                    if (revenueCounter.comparingItemsRevenue == false) {
-                        revenueCounter.printResultOfItemsComparison()
-                    }
-                    if (revenueCounter.comparingServiceRevenue == false) {
-                        revenueCounter.printResultOfServiceComparison()
-                    }
-                    print()
-
+                    RevenueCounter().isProfitToRevenueCorrect()
                 }
-                else -> {println("Команды не существует")
-                print()}
+                else -> {
+                    println("Команды не существует")
+                }
             }
-
+            showBillingCommands()
         }
     }
 
-    private fun print() {
+    private fun showBillingCommands() {
         println("Рассчёты: ")
         println("1 - Подсчёт минимальной прибыли по товару и услуге")
         println("2 - Сверка прибыли по услугам и товарам")

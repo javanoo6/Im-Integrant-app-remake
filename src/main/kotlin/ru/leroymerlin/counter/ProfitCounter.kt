@@ -1,39 +1,17 @@
 package ru.leroymerlin.counter
 
-import ru.leroymerlin.data.Item
-import ru.leroymerlin.data.Service
+import ru.leroymerlin.reader.ItemReader
+import ru.leroymerlin.reader.ServiceReader
 
 class ProfitCounter {
-    private val itemName: String
-    private val sum: Double
-    private val quantity: Int
-    private val commission: Double
 
+    fun showMinProfitOfItemsAndService() {
+        ItemReader().getItems().associateBy { it.sum * it.commission * it.quantity / 100 }.minByOrNull { it.key }
+            ?.also { println("Минимальная выручка ${it.key} по товару ${it.value.itemName} с комиссией ${it.value.commission}") }
 
-    constructor(item: Item) {
-        this.itemName = item.itemName
-        this.sum = item.sum
-        this.quantity = item.quantity
-        this.commission = item.commission
-
-
-    }
-
-    constructor(service: Service) {
-        this.itemName = service.itemName
-        this.sum = service.sum
-        this.quantity = 1
-        this.commission = service.commission
-    }
-
-    fun showResultOfItems(){
-        println("Минимальная выручка  ${countProfit()}  по товару  $itemName, c комиссией $commission")
-    }
-    fun showResultOfServices(){
-        println("Минимальная выручка  ${countProfit()}  по услуге  $itemName, c комиссией $commission")
-    }
-    fun countProfit():Double{
-        return this.sum*this.quantity*this.commission/100
+        ServiceReader().getService().associateBy { it.sum * it.commission / 100 }.minByOrNull { it.key }
+            ?.also { println("Минимальная выручка ${it.key} по уcлуге ${it.value.itemName} с комиссией ${it.value.commission}") }
     }
 
 }
+
