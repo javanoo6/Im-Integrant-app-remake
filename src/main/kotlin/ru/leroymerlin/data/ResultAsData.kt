@@ -1,8 +1,7 @@
 package ru.leroymerlin.data
 
-data class Item(
+data class ResultAsData(
+    val profit: Double,
     val itemName: String,
-    val sum: Double,
-    val quantity: Int,
     val commission: Double
 )

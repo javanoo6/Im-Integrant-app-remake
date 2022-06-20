@@ -17,7 +17,7 @@ class RevenueCounter {
     private val isProfitEqualsToItemsRevenue: Boolean = itemsProfit.equals(itemsRevenue)
     private val isProfitEqualsToServiceRevenue: Boolean = serviceProfit.equals(serviceRevenue)
 
-    fun isProfitToRevenueCorrect() {
+    fun showIfProfitToRevenueIsCorrect() {
         if (!isProfitEqualsToItemsRevenue) println("Выручка по товарам $itemsProfit не совпадает с выручкой из отчёта $itemsRevenue") else {
             return
         }

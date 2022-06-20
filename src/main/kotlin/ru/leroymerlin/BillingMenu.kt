@@ -21,7 +21,7 @@ class BillingMenu {
                 }
                 "2" -> {
                     println("Вы выбрали : Сверка прибыли по услугам и товарам")
-                    RevenueCounter().isProfitToRevenueCorrect()
+                    RevenueCounter().showIfProfitToRevenueIsCorrect()
                 }
                 else -> {
                     println("Команды не существует")
